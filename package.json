@@ -7,8 +7,9 @@
         "start": "php artisan serve",
         "mgrt": "php artisan migrate",
         "seed": "php artisan db:seed",
-        "state": "npm i && npm run build"
-
+        "state": "npm i && npm run build",
+        "lw": "composer require livewire/livewire",
+        "cpn": "php artisan make:livewire <Component>"
     },
     "devDependencies": {
         "axios": "^1.1.2",

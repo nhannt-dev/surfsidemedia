@@ -1,0 +1,11 @@
+http://localhost/phpmyadmin/index.php?route=/database/structure&db=surfsidemedia   ->Đường link mở đến database hiện tại
+
+composer require livewire/livewire ->Framework tạo component UI
+
+php artisan make:livewire HomeComponent
+
+php artisan make:livewire ShopComponent
+
+php artisan make:livewire CartComponent
+
+php artisan make:livewire CheckoutComponent
