@@ -49,9 +49,20 @@
                     </div>
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
-                            <ul>                                
-                                <li><i class="fi-rs-key"></i><a href="login.html">Log In </a>  / <a href="register.html">Sign Up</a></li>
-                            </ul>
+                            @auth
+                                <ul>                                
+                                    <li><i class="fi-rs-user"></i>{{ Auth::user()->name }}  / 
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
+                                        </form>
+                                    </li>
+                                </ul>
+                            @else
+                                <ul>                                
+                                    <li><i class="fi-rs-key"></i><a href="{{ route('login') }}">Log In </a>  / <a href="{{ route('register') }}">Sign Up</a></li>
+                                </ul>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -61,7 +72,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
+                        <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-1">
@@ -130,7 +141,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
+                        <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
@@ -317,7 +328,7 @@
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a class="active" href="index.html">Home </a></li>
+                                    <li><a class="active" href="/">Home </a></li>
                                     <li><a href="about.html">About</a></li>
                                     <li><a href="shop.html">Shop</a></li>
                                     <li class="position-static"><a href="#">Our Collections <i class="fi-rs-angle-down"></i></a>
@@ -380,15 +391,22 @@
                                     <li><a href="blog.html">Blog </a></li>                                    
                                     <li><a href="contact.html">Contact</a></li>
                                     <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="#">Dashboard</a></li>
-                                            <li><a href="#">Products</a></li>
-                                            <li><a href="#">Categories</a></li>
-                                            <li><a href="#">Coupons</a></li>
-                                            <li><a href="#">Orders</a></li>
-                                            <li><a href="#">Customers</a></li>
-                                            <li><a href="#">Logout</a></li>                                            
-                                        </ul>
+                                        @auth
+                                            @if (Auth::user()->utype === 'ADM')
+                                                <ul class="sub-menu">
+                                                    <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                                                    <li><a href="#">Products</a></li>
+                                                    <li><a href="#">Categories</a></li>
+                                                    <li><a href="#">Coupons</a></li>
+                                                    <li><a href="#">Orders</a></li>
+                                                    <li><a href="#">Customers</a></li>
+                                                </ul>
+                                            @else
+                                                <ul class="sub-menu">
+                                                    <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
+                                                </ul>
+                                            @endif
+                                        @endif
                                     </li>
                                 </ul>
                             </nav>
@@ -466,7 +484,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index.html"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
+                    <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -504,7 +522,7 @@
                     <!-- mobile menu start -->
                     <nav>
                         <ul class="mobile-menu">
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="index.html">Home</a></li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/">Home</a></li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="shop.html">shop</a></li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Our Collections</a>
                                 <ul class="dropdown">
@@ -552,10 +570,10 @@
                         <a href="contact.html"> Our location </a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="login.html">Log In </a>                        
+                        <a href="{{ route('login') }}">Log In </a>                        
                     </div>
                     <div class="single-mobile-header-info">                        
-                        <a href="register.html">Sign Up</a>
+                        <a href="{{ route('register') }}">Sign Up</a>
                     </div>
                     <div class="single-mobile-header-info">
                         <a href="#">(+1) 0000-000-000 </a>
@@ -607,7 +625,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="index.html"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
+                                <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo"></a>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                             <p class="wow fadeIn animated">
